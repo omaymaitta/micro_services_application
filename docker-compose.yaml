@@ -1,8 +1,8 @@
 version: '3'
 services:
-  eurika-service:
+  eureka-service:
     build: EurikaService/
-    hostname: eurika-service
+    hostname: eureka-service
     ports:
       - "8761:8761"
     networks:
@@ -14,7 +14,7 @@ services:
     ports:
       - "8081:8081"
     depends_on:
-      - eurika-service
+      - eureka-service
     environment:
       - eureka.client.service-url.defaultZone=http://eureka-service:8761/eureka
     networks:
@@ -28,7 +28,7 @@ services:
     restart: on-failure
     depends_on:
       - openlab-customer-service
-      - eurika-service
+      - eureka-service
     environment:
       - eureka.client.service-url.defaultZone=http://eureka-service:8761/eureka
     networks:
@@ -42,7 +42,7 @@ services:
     depends_on:
       - openlab-customer-service
       - enset-billing-service
-      - eurika-service
+      - eureka-service
     environment:
       - eureka.client.service-url.defaultZone=http://eureka-service:8761/eureka
     networks:
